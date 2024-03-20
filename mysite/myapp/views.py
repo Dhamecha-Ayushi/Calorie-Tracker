@@ -5,7 +5,7 @@ from .models import Food, Consume
 
 def index(request):
 
-    if request.method == "Post":
+    if request.method == "POST":
         food_consumed = request.POST['food_consumed']
         consume = Food.objects.get(name=food_consumed)
         user = request.user
