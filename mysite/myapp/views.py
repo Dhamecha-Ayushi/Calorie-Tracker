@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect
 from .models import Food, Consume
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 
 
+
+def home(request):
+    return render(request, 'myapp/home.html')
+
+
+@csrf_exempt
 def index(request):
-
-    if request.method == "Post":
+    foods = None
+    if request.method == "POST":
         food_consumed = request.POST['food_consumed']
         consume = Food.objects.get(name=food_consumed)
         user = request.user
@@ -19,7 +26,7 @@ def index(request):
 
     return render(request, 'myapp/index.html', {'foods': foods, 'consumed_food': consumed_food})
 
-
+@csrf_exempt
 def delete_consume(request, id):
     consumed_food = Consume.objects.get(id=id)
     if request.method == 'POST':
