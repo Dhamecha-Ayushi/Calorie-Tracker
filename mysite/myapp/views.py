@@ -11,7 +11,6 @@ def home(request):
 
 @csrf_exempt
 def index(request):
-    foods = None
     if request.method == "POST":
         food_consumed = request.POST['food_consumed']
         consume = Food.objects.get(name=food_consumed)
